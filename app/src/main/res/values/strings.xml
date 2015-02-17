@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MRCDaggerMVP</string>
+    <string name="main_activity_label">Main Activity</string>
+</resources>
