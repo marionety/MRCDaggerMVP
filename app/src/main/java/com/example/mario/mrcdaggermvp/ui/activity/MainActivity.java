@@ -13,6 +13,8 @@ import com.example.mario.mrcdaggermvp.di.MainModule;
 import com.example.mario.mrcdaggermvp.ui.common.BaseActivity;
 import com.example.mario.mrcdaggermvp.ui.presenter.MainPresenter;
 import com.example.mario.mrcdaggermvp.ui.view.MainView;
+import com.github.mrengineer13.snackbar.SnackBar;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +34,8 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
 
     @InjectView(R.id.list)
     ListView _listView;
-    @InjectView(R.id.progress)
-    ProgressBar _progresBar;
+    @InjectView(R.id.progress_wheel)
+    ProgressWheel _progressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +58,13 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
 
     @Override
     public void showProgress() {
-        _progresBar.setVisibility(View.VISIBLE);
+        _progressWheel.setVisibility(View.VISIBLE);
         _listView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        _progresBar.setVisibility(View.INVISIBLE);
+        _progressWheel.setVisibility(View.INVISIBLE);
         _listView.setVisibility(View.VISIBLE);
     }
 
@@ -73,7 +75,19 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        new SnackBar.Builder(this)
+                //.withOnClickListener(this)
+                .withMessage(message) // OR
+                //.withMessageId(message)
+
+                //.withActionMessage(message) // OR
+                //.withActionMessageId(message)
+
+                .withTextColorId(R.color.md_light_green_a700)
+                .withBackgroundColorId(R.color.md_grey_800)
+                //.withVisibilityChangeListener(this)
+                .withDuration((short) 2000)
+                .show();
     }
 
     @Override
